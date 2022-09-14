@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:food_view/blocs/main_bloc/screen.dart';
 
 import '../../../style/color.dart';
-import '../service/change-screen.dart';
 
 Widget bottomNavigation(BuildContext context, ChangeScreenBloc bloc) {
   return DotNavigationBar(
