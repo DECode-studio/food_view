@@ -25,3 +25,9 @@ TextStyle priceText = GoogleFonts.inter(
   color: black,
   fontSize: 20,
 );
+
+TextStyle categoryText = GoogleFonts.inter(
+  fontWeight: FontWeight.bold,
+  color: black,
+  fontSize: 10,
+);

@@ -1,5 +1,6 @@
 class FoodModel {
   Meals? meals;
+  List<Meals>? foods;
   String? error;
 
   FoodModel({this.meals});
@@ -9,20 +10,32 @@ class FoodModel {
   }
 
   FoodModel.fromJson(Map<String, dynamic> json) {
-    meals = json['meals'] != null ? new Meals.fromJson(json['meals']) : null;
+    // meals = json['meals'] != null ? new Meals.fromJson(json['meals']) : null;
+
+    if (json['meals'] != null) {
+      foods = [];
+      json['meals'].forEach((v) {
+        foods!.add(Meals.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.meals != null) {
-      data['meals'] = this.meals!.toJson();
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    // if (this.meals != null) {
+    //   data['meals'] = this.meals!.toJson();
+    // }
+
+    if (this.foods != null) {
+      data['meals'] = this.foods!.map((v) => v.toJson()).toList();
     }
+
     return data;
   }
 }
 
 class Meals {
-  int? idMeal;
+  String? idMeal;
   String? strMeal;
   String? strCategory;
   String? strInstructions;
@@ -51,7 +64,7 @@ class Meals {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['idMeal'] = this.idMeal;
     data['strMeal'] = this.strMeal;
     data['strCategory'] = this.strCategory;

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nur_wahid_azhar.food_view">
    <application
-        android:label="food_view"
+        android:label="Food View"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

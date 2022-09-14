@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_view/blocs/main_bloc/screen.dart';
+import 'package:food_view/pages/home/main.dart';
 import 'package:food_view/pages/main/widgets/navigation.dart';
 import 'package:food_view/style/color.dart';
 
@@ -39,9 +40,19 @@ class _mainPageState extends State<mainPage> {
           return Scaffold(
             backgroundColor: white,
             body: SafeArea(
-              child: Container(),
+              child: Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: homePage(),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: bottomNavigation(context, bloc),
+                  ),
+                ],
+              ),
             ),
-            bottomNavigationBar: bottomNavigation(context, bloc),
           );
         });
   }

@@ -6,3 +6,5 @@ abstract class FoodEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class GetFoodList extends FoodEvent {}
