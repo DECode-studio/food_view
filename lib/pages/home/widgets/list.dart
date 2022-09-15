@@ -43,11 +43,13 @@ Widget _buildCard(BuildContext context, FoodModel model) {
       shrinkWrap: true,
       itemBuilder: (context, index) {
         return cardFood(
+          context,
           model.foods![index].idMeal.toString(),
           model.foods![index].strMealThumb.toString(),
           model.foods![index].strMeal.toString(),
           model.foods![index].strCategory.toString(),
           model.foods![index].strTags.toString(),
+          model.foods![index].strInstructions.toString(),
         );
       },
     ),

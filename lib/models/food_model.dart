@@ -42,6 +42,7 @@ class Meals {
   String? strMealThumb;
   String? strTags;
   String? strYoutube;
+  String? error;
 
   Meals({
     this.idMeal,
@@ -52,6 +53,10 @@ class Meals {
     this.strTags,
     this.strYoutube,
   });
+
+  Meals.withError(String errorMessage) {
+    error = errorMessage;
+  }
 
   Meals.fromJson(Map<String, dynamic> json) {
     idMeal = json['idMeal'];

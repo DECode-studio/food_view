@@ -1,21 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:food_view/pages/detail/main.dart';
+import 'package:food_view/service/navigation.dart';
 import 'package:food_view/style/text.dart';
 
 import '../../../style/color.dart';
 
 Widget cardFood(
+  BuildContext context,
   String mealId,
   String mealImage,
   String mealName,
   String mealCategory,
-  String mealtag,
+  String mealTag,
+  String mealInstruction,
 ) {
   return Column(
     children: [
       SizedBox(
         height: 150,
         child: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Get().to(
+              context,
+              detailPage(
+                mealId,
+                mealImage,
+                mealName,
+                mealCategory,
+                mealTag,
+                mealInstruction,
+              ),
+            );
+          },
           child: Stack(
             children: [
               Align(
@@ -47,7 +63,7 @@ Widget cardFood(
                       ),
                       const Spacer(),
                       Text("Category : ${mealCategory}"),
-                      Text("Tags        : ${mealtag}"),
+                      Text("Tags        : ${mealTag}"),
                     ],
                   ),
                 ),
