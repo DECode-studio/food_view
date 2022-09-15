@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_view/blocs/main_bloc/screen.dart';
+import 'package:food_view/pages/favorite/main.dart';
 import 'package:food_view/pages/home/main.dart';
 import 'package:food_view/pages/main/widgets/navigation.dart';
 import 'package:food_view/style/color.dart';
@@ -38,13 +39,13 @@ class _mainPageState extends State<mainPage> {
         stream: bloc.output,
         builder: (context, snapshot) {
           return Scaffold(
-            backgroundColor: white,
+            backgroundColor: bloc.navIndex == 0 ? white : yellow,
             body: SafeArea(
               child: Stack(
                 children: [
                   Align(
                     alignment: Alignment.topCenter,
-                    child: homePage(),
+                    child: bloc.navIndex == 0 ? homePage() : favoritePage(),
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
