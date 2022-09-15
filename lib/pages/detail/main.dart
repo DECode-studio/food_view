@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_view/blocs/favorite_bloc/favorite_bloc.dart';
 import 'package:food_view/pages/detail/widgets/detail.dart';
 import 'package:food_view/pages/detail/widgets/toolbar.dart';
 import 'package:food_view/style/color.dart';
@@ -21,13 +22,38 @@ class detailPage extends StatefulWidget {
 }
 
 class _detailPageState extends State<detailPage> {
+  CheckFavoritBloc bloc = CheckFavoritBloc();
+  FavoriteBloc fBloc = FavoriteBloc();
+
+  @override
+  void initState() {
+    super.initState();
+    bloc.sinkInputType.add(widget.mealId);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    fBloc.sinkInput.add(0);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: yellow,
       body: Column(
         children: [
-          toolBar(context),
+          toolBar(
+            context,
+            bloc,
+            fBloc,
+            widget.mealId,
+            widget.mealImage,
+            widget.mealName,
+            widget.mealCategory,
+            widget.mealTag,
+            widget.mealInstruction,
+          ),
           detailData(
             context,
             widget.mealId,

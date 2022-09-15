@@ -11,7 +11,7 @@ class FavoriteDao {
         mealName TEXT,
         mealCategory TEXT,
         mealTag TEXT,
-        mealInstruction TEXT,
+        mealInstruction TEXT
       )
       """);
   }
@@ -26,7 +26,7 @@ class FavoriteDao {
     );
   }
 
-  static Future<int> createItem(
+  static Future createItem(
     String mealId,
     String mealImage,
     String mealName,
@@ -34,21 +34,25 @@ class FavoriteDao {
     String mealTag,
     String mealInstruction,
   ) async {
-    final db = await FavoriteDao.db();
+    try {
+      final db = await FavoriteDao.db();
 
-    final data = {
-      'mealId': mealId,
-      'mealImage': mealImage,
-      'mealName': mealName,
-      'mealCategory': mealCategory,
-      'mealTag': mealTag,
-      'mealInstruction': mealInstruction,
-    };
+      final data = {
+        'mealId': mealId,
+        'mealImage': mealImage,
+        'mealName': mealName,
+        'mealCategory': mealCategory,
+        'mealTag': mealTag,
+        'mealInstruction': mealInstruction,
+      };
 
-    final id = await db.insert('favorites', data,
-        conflictAlgorithm: sql.ConflictAlgorithm.replace);
+      final id = await db.insert('favorites', data,
+          conflictAlgorithm: sql.ConflictAlgorithm.replace);
 
-    return id;
+      return 'Success';
+    } catch (e) {
+      return e.toString();
+    }
   }
 
   static Future<List<Map<String, dynamic>>> getItems() async {
@@ -56,9 +60,10 @@ class FavoriteDao {
     return db.query('favorites', orderBy: "id");
   }
 
-  static Future<List<Map<String, dynamic>>> getItem(int id) async {
+  static Future<List<Map<String, dynamic>>> getItem(String mealId) async {
     final db = await FavoriteDao.db();
-    return db.query('favorites', where: "id = ?", whereArgs: [id], limit: 1);
+    return db.query('favorites',
+        where: "mealId = ?", whereArgs: [mealId], limit: 1);
   }
 
   static Future<int> updateItem(
@@ -87,12 +92,18 @@ class FavoriteDao {
   }
 
   // Delete
-  static Future<void> deleteItem(int id) async {
+  static Future deleteItem(
+    String mealId,
+  ) async {
     final db = await FavoriteDao.db();
     try {
-      await db.delete("favorites", where: "id = ?", whereArgs: [id]);
+      await db.delete("favorites", where: "mealId = ?", whereArgs: [mealId]);
+
+      return "Success";
     } catch (err) {
       print("Something went wrong when deleting an item: $err");
+
+      return "Something went wrong when deleting an item: $err";
     }
   }
 }
